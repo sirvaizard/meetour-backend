@@ -1,5 +1,5 @@
-import LocationRepositoryInMemory from '../../src/infra/repository/location-repository-in-memory'
-import CreateLocation from '../../src/domain/usecase/create-location'
+import LocationRepositoryInMemory from '../../../src/infra/repository/location-repository-in-memory'
+import CreateLocation from '../../../src/domain/usecase/create-location'
 
 describe('#Location', () => {
     it('should be able to create a location with valid params', async () => {

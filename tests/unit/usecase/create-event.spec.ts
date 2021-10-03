@@ -1,6 +1,6 @@
-import CreateEvent from '../../src/domain/usecase/create-event'
-import EventRepositoryInMemory from '../../src/infra/repository/event-repository-in-memory'
-import LocationRepositoryInMemory from '../../src/infra/repository/location-repository-in-memory'
+import CreateEvent from '../../../src/domain/usecase/create-event'
+import EventRepositoryInMemory from '../../../src/infra/repository/event-repository-in-memory'
+import LocationRepositoryInMemory from '../../../src/infra/repository/location-repository-in-memory'
 
 describe('#Event', () => {
     it('should be able to create and event with valid params', async () => {
