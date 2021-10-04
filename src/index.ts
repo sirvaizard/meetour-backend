@@ -1,12 +1,15 @@
 import express from 'express'
 
 import LocationRepositoryInMemory from './infra/repository/location-repository-in-memory'
+import EventRepositoryInMemory from './infra/repository/event-repository-in-memory'
+
 import CreateLocationController from './presentation/controller/create-location-controller'
 import CreateEventController from './presentation/controller/create-event-controller'
+
 import CreateLocation from './domain/usecase/create-location'
 import CreateEvent from './domain/usecase/create-event'
+
 import ExpressAdapter from './infra/http/express'
-import EventRepositoryInMemory from './infra/repository/event-repository-in-memory'
 
 // Repositories
 const locationRepository = new LocationRepositoryInMemory()
