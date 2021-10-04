@@ -6,13 +6,13 @@ import HttpResponse from '../protocols/http-response'
 export default class CreateLocationController implements Controller {
     constructor (readonly createLocation: CreateLocation) {}
 
-    execute (HttpRequest: HttpRequest): Promise<HttpResponse> {
+    async execute (httpRequest: HttpRequest): Promise<HttpResponse> {
         const requiredFields = ['name', 'address', 'latitude', 'longitude',
             'openHour', 'closeHour']
 
         const missingFields = []
         for (const field of requiredFields) {
-            if (!HttpRequest.body[field]) {
+            if (!httpRequest.body[field]) {
                 missingFields.push(field)
             }
         }
@@ -26,9 +26,20 @@ export default class CreateLocationController implements Controller {
             })
         }
 
-        return Promise.resolve({
-            statusCode: 200,
-            body: ''
-        })
+        try {
+            const { name, address, latitude, longitude, openHour, closeHour } = httpRequest.body
+            const location = await this.createLocation.execute(name, address, latitude,
+                longitude, openHour, closeHour)
+
+            return Promise.resolve({
+                statusCode: 201,
+                body: location
+            })
+        } catch {
+            return Promise.resolve({
+                statusCode: 500,
+                body: new Error()
+            })
+        }
     }
 }
