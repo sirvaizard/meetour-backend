@@ -3,7 +3,7 @@ import Location from "../../domain/entity/location";
 import LocationRepository from "../../domain/repository/location-repository";
 
 export default class LocationRepositoryInMemory implements LocationRepository {
-    private locations: Location[]
+    private readonly locations: Location[]
 
     constructor () {
         this.locations = []

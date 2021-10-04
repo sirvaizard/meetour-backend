@@ -3,7 +3,7 @@ import Location from "../../domain/entity/location";
 import EventRepository from "../../domain/repository/event-repository";
 
 export default class EventRepositoryInMemory implements EventRepository {
-    readonly events: Event[]
+    private readonly events: Event[]
 
     constructor () {
         this.events = []
