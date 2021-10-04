@@ -8,16 +8,18 @@ describe('#Event', () => {
         const locationRepository = new LocationRepositoryInMemory()
         const createEvent = new CreateEvent(eventRepository, locationRepository)
 
-        const now = new Date()
+        const today = new Date()
+        today.setHours(12)
+
         const location = await locationRepository.createLocation('MASP', 'Av. Paulista 123', 1, 1, 8, 18)
-        const event = await createEvent.execute('My Event', 'My cool event description', location, now, 100)
+        const event = await createEvent.execute('My Event', 'My cool event description', location, today, 100)
 
         expect(event).toEqual({
             id: '0',
             name: 'My Event',
             description: 'My cool event description',
             location: location,
-            begin: now,
+            begin: today,
             capacity: 100
         })
     })
@@ -27,9 +29,11 @@ describe('#Event', () => {
         const locationRepository = new LocationRepositoryInMemory()
         const createEvent = new CreateEvent(eventRepository, locationRepository)
 
-        const now = new Date()
+        const today = new Date()
+        today.setHours(12)
+
         const location = await locationRepository.createLocation('MASP', 'Av. Paulista 123', 1, 1, 8, 18)
-        const event = await createEvent.execute('My Event', 'My cool event description', location, now, 100)
+        const event = await createEvent.execute('My Event', 'My cool event description', location, today, 100)
 
         expect(location.events).toContain(event)
     })
