@@ -16,7 +16,7 @@ export default class AuthenticateUser {
             throw new Error()
         }
 
-        if(!this.hash.compare(password, user.password)) {
+        if(!(await this.hash.compare(password, user.password))) {
             // TODO: handle this error better
             throw new Error()
         }
