@@ -6,8 +6,8 @@ import Token from "../../../src/domain/ports/token"
 
 const makeToken = (): Token => {
     class TokenStub implements Token {
-        generate (payload: any, secret: string): Promise<string> {
-            return Promise.resolve('tokentokentoken')
+        generate (payload: any, secret: string): string {
+            return 'tokentokentoken'
         }
     }
 
