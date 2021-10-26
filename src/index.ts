@@ -1,4 +1,5 @@
 import express from 'express'
+import { config } from 'dotenv'
 
 import LocationRepositoryInMemory from './infra/repository/location-repository-in-memory'
 import EventRepositoryInMemory from './infra/repository/event-repository-in-memory'
@@ -18,6 +19,8 @@ import BcryptHash from './infra/adapters/bcryptjs-hash'
 import JsonWebToken from './infra/adapters/jsonwebtoken'
 
 import ExpressAdapter from './infra/http/express'
+
+config()
 
 // Adapters
 const hash = new BcryptHash()
