@@ -1,9 +1,10 @@
 import LocationRepositoryInMemory from '../../../src/infra/repository/location-repository-in-memory'
+import LocationRepository from '../../../src/domain/repository/location-repository'
 import CreateLocation from '../../../src/domain/usecase/create-location'
 
 describe('#Location', () => {
     it('should be able to create a location with valid params', async () => {
-        const locationRepository = new LocationRepositoryInMemory()
+        const locationRepository: LocationRepository = new LocationRepositoryInMemory()
         const createLocation = new CreateLocation(locationRepository)
 
         const location = await createLocation.execute(
