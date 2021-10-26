@@ -137,7 +137,6 @@ describe('#Create User Controller', () => {
             id: '0',
             name: 'John Doe',
             email: 'john.doe@mail.com',
-            password: 'validpassword',
             cpf: 'validcpf',
             birth: now
         })

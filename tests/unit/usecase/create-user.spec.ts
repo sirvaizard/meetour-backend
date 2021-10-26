@@ -46,7 +46,6 @@ describe('#User', () => {
             id: '0',
             name: 'John Doe',
             email: 'john.doe@mail.com',
-            password: 'correctpassword',
             birth: now,
             cpf: '99999999999'
         })
