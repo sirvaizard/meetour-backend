@@ -24,7 +24,7 @@ interface SutType {
 
 const makeSut = (): SutType => {
     const hash = makeHash()
-    const userRepository = new UserRepositoryInMemory
+    const userRepository = new UserRepositoryInMemory()
     const createUser = new CreateUser(userRepository, hash)
 
     return {
