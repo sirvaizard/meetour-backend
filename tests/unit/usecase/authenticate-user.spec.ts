@@ -54,6 +54,6 @@ describe('#Authenticate User', () => {
 
         const response = await authenticateUser.execute('john.doe@mail.com', 'correctpassword')
 
-        expect(response).toHaveProperty('token')
+        expect(response).toEqual('tokentokentoken')
     })
 })
