@@ -117,7 +117,7 @@ describe('#Create Location Controller', () => {
         expect(response.statusCode).toBe(400)
     })
 
-    it.skip('Should return 500 if CreateLocation throws an error', async () => {
+    it('Should return 500 if CreateLocation throws an error', async () => {
         const locationRepository = new LocationRepositoryInMemory()
         const createLocation = new CreateLocation(locationRepository)
         const createLocationController = new CreateLocationController(createLocation)
