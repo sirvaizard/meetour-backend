@@ -9,6 +9,10 @@ const makeToken = (): Token => {
         generate (payload: any, secret: string): string {
             return 'tokentokentoken'
         }
+
+        async verify (token: string, secret: string): Promise<string | null> {
+            return Promise.resolve('id')
+        }
     }
 
     return new TokenStub()
