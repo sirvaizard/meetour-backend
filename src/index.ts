@@ -1,5 +1,6 @@
 import express, { Router } from 'express'
 import { config } from 'dotenv'
+import cors from 'cors'
 
 import LocationRepositoryInMemory from './infra/repository/location-repository-in-memory'
 import EventRepositoryInMemory from './infra/repository/event-repository-in-memory'
@@ -59,6 +60,7 @@ router.post('/api/event/', ExpressControllerAdapter.create(createEventController
 
 app
     .use(express.json())
+    .use(cors())
     .use(router)
 
 const PORT = process.env.PORT || 3000
