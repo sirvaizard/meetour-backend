@@ -46,13 +46,15 @@ const authenticateUserController = new AuthenticateUserController(authenticateUs
 const router = Router()
 
 const app = express()
-    .use(router)
-    .use(express.json())
 
 router.post('/api/location', ExpressControllerAdapter.create(createLocationController))
 router.post('/api/event/', ExpressControllerAdapter.create(createEventController))
 router.post('/api/user/', ExpressControllerAdapter.create(createUserController))
 router.post('/api/token/', ExpressControllerAdapter.create(authenticateUserController))
+
+app
+    .use(express.json())
+    .use(router)
 
 const PORT = process.env.PORT || 3000
 
