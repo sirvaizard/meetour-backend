@@ -1,6 +1,6 @@
 import Controller from "../../presentation/protocols/controller"
 
-export default class ExpressAdapter {
+export class ExpressControllerAdapter {
     static create (controller: Controller) {
         const handler = controller.execute.bind(controller)
         return async function (req: any, res: any) {

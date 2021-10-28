@@ -18,7 +18,7 @@ import AuthenticateUser from './domain/usecase/authenticate-user'
 import BcryptHash from './infra/adapters/bcryptjs-hash'
 import JsonWebToken from './infra/adapters/jsonwebtoken'
 
-import ExpressAdapter from './infra/http/express'
+import { ExpressControllerAdapter } from './infra/http/express'
 
 config()
 
@@ -46,10 +46,10 @@ const authenticateUserController = new AuthenticateUserController(authenticateUs
 const app = express()
     .use(express.json())
 
-app.post('/api/location', ExpressAdapter.create(createLocationController))
-app.post('/api/event/', ExpressAdapter.create(createEventController))
-app.post('/api/user/', ExpressAdapter.create(createUserController))
-app.post('/api/token/', ExpressAdapter.create(authenticateUserController))
+app.post('/api/location', ExpressControllerAdapter.create(createLocationController))
+app.post('/api/event/', ExpressControllerAdapter.create(createEventController))
+app.post('/api/user/', ExpressControllerAdapter.create(createUserController))
+app.post('/api/token/', ExpressControllerAdapter.create(authenticateUserController))
 
 const PORT = process.env.PORT || 3000
 
