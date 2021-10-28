@@ -9,3 +9,19 @@ export class ExpressControllerAdapter {
         }
     }
 }
+
+export class ExpressMiddlewareAdapter {
+    static create (middleware: Controller) {
+        const handler = middleware.execute.bind(middleware)
+        return async function (req: any, res: any, next: any) {
+            const { body, statusCode} = await handler({body: req.body, params: req.params, headers: req.headers})
+
+            // Adopting a pattern that all successfull middleware will return code 200
+            if (statusCode !== 200) {
+                return res.status(statusCode).json(body)
+            }
+
+            return next()
+        }
+    }
+}
