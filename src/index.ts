@@ -9,6 +9,7 @@ import CreateLocationController from './presentation/controller/create-location-
 import CreateEventController from './presentation/controller/create-event-controller'
 import CreateUserController from './presentation/controller/create-user-controller'
 import AuthenticateUserController from './presentation/controller/authenticate-user-controller'
+import AuthenticationMiddleware from './presentation/controller/authentication-middleware'
 
 import CreateLocation from './domain/usecase/create-location'
 import CreateEvent from './domain/usecase/create-event'
@@ -18,7 +19,7 @@ import AuthenticateUser from './domain/usecase/authenticate-user'
 import BcryptHash from './infra/adapters/bcryptjs-hash'
 import JsonWebToken from './infra/adapters/jsonwebtoken'
 
-import { ExpressControllerAdapter } from './infra/http/express'
+import { ExpressControllerAdapter, ExpressMiddlewareAdapter } from './infra/http/express'
 
 config()
 
@@ -42,15 +43,19 @@ const createLocationController = new CreateLocationController(createLocation)
 const createEventController = new CreateEventController(createEvent)
 const createUserController = new CreateUserController(createUser)
 const authenticateUserController = new AuthenticateUserController(authenticateUser)
+const authenticationMiddleware = new AuthenticationMiddleware(token, process.env.APP_SECRET ?? '')
 
 const router = Router()
 
 const app = express()
 
-router.post('/api/location', ExpressControllerAdapter.create(createLocationController))
-router.post('/api/event/', ExpressControllerAdapter.create(createEventController))
 router.post('/api/user/', ExpressControllerAdapter.create(createUserController))
 router.post('/api/token/', ExpressControllerAdapter.create(authenticateUserController))
+
+router.use(ExpressMiddlewareAdapter.create(authenticationMiddleware))
+
+router.post('/api/location', ExpressControllerAdapter.create(createLocationController))
+router.post('/api/event/', ExpressControllerAdapter.create(createEventController))
 
 app
     .use(express.json())
