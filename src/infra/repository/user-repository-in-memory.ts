@@ -20,8 +20,9 @@ export default class UserRepositoryInMemory implements UserRepository {
         throw new Error("Method not implemented.");
     }
 
-    findByCpf(): Promise<User | null> {
-        throw new Error("Method not implemented.");
+    findByCpf(cpf: string): Promise<User | null> {
+        const user = this.users.find((user) => user.cpf === cpf)
+        return Promise.resolve(user ? user : null)
     }
 
     findByEmail(email: string): Promise<User | null> {
