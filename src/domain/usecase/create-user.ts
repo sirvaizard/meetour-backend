@@ -12,6 +12,11 @@ export default class CreateUser {
             throw new Error()
         }
 
+        if (await this.userRepository.findByCpf(cpf)) {
+            // TODO: handle this error better
+            throw new Error()
+        }
+
         const password_hash = await this.hash.hash(password)
         return this.userRepository.create(name, email, password_hash, cpf, birth)
     }

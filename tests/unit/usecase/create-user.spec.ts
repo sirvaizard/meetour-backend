@@ -74,4 +74,21 @@ describe('#User', () => {
             expect(e).toBeInstanceOf(Error)
         }
     })
+
+    it('should not be able to create user with cpf that already exists', async () => {
+        const { createUser } = makeSut()
+
+        await createUser.execute('John Doe', 'john.doe@mail.com',
+            'correctpassword', '99999999999', new Date())
+
+        let error
+        try {
+            await createUser.execute(
+                'Jane Doe', 'jane.doe@mail.com', 'correctpassword', '99999999999', new Date())
+        } catch (e) {
+            error = e
+        }
+        expect(error).toBeDefined()
+        expect(error).toBeInstanceOf(Error)
+    })
 })
