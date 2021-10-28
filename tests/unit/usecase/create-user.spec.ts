@@ -60,4 +60,18 @@ describe('#User', () => {
 
         expect(hashSpy).toHaveBeenCalledWith('correctpassword')
     })
+
+    it('should not be able to create user with email that already exists', async () => {
+        const { createUser } = makeSut()
+
+        await createUser.execute('John Doe', 'john.doe@mail.com',
+            'correctpassword', '99999999999', new Date())
+
+        try {
+            await createUser.execute(
+                'John Doe', 'john.doe@mail.com', 'correctpassword', '99999999998', new Date())
+        } catch (e) {
+            expect(e).toBeInstanceOf(Error)
+        }
+    })
 })

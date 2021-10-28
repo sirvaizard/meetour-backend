@@ -7,7 +7,12 @@ export default class CreateUser {
     async execute (name: string, email: string, password: string, cpf: string, birth: Date) {
         // TODO: should check for fields validity
 
+        if (await this.userRepository.findByEmail(email)) {
+            // TODO: handle this error better
+            throw new Error()
+        }
+
         const password_hash = await this.hash.hash(password)
-        return await this.userRepository.create(name, email, password_hash, cpf, birth)
+        return this.userRepository.create(name, email, password_hash, cpf, birth)
     }
 }
