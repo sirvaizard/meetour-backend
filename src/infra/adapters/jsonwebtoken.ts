@@ -8,8 +8,10 @@ export default class JsonWebToken implements Token {
     }
 
     async verify (token: string, secret: string): Promise<string | null> {
+        const [prefix, rawToken] = token.split(' ')
+
         try {
-            const decoded = jwt.verify(token, secret).toString()
+            const decoded = jwt.verify(rawToken, secret).toString()
 
             return Promise.resolve(decoded)
         } catch {
