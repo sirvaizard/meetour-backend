@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Router } from 'express'
 import { config } from 'dotenv'
 
 import LocationRepositoryInMemory from './infra/repository/location-repository-in-memory'
@@ -43,13 +43,16 @@ const createEventController = new CreateEventController(createEvent)
 const createUserController = new CreateUserController(createUser)
 const authenticateUserController = new AuthenticateUserController(authenticateUser)
 
+const router = Router()
+
 const app = express()
+    .use(router)
     .use(express.json())
 
-app.post('/api/location', ExpressControllerAdapter.create(createLocationController))
-app.post('/api/event/', ExpressControllerAdapter.create(createEventController))
-app.post('/api/user/', ExpressControllerAdapter.create(createUserController))
-app.post('/api/token/', ExpressControllerAdapter.create(authenticateUserController))
+router.post('/api/location', ExpressControllerAdapter.create(createLocationController))
+router.post('/api/event/', ExpressControllerAdapter.create(createEventController))
+router.post('/api/user/', ExpressControllerAdapter.create(createUserController))
+router.post('/api/token/', ExpressControllerAdapter.create(authenticateUserController))
 
 const PORT = process.env.PORT || 3000
 
