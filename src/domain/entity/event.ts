@@ -24,4 +24,13 @@ export default class Event {
     hasAttendee (user: User): boolean {
         return this.attendees.includes(user)
     }
+
+    addAttendee (user: User): boolean {
+        if (this.hasAttendee(user)) {
+            return false
+        }
+
+        this.attendees.push(user)
+        return true
+    }
 }
