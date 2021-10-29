@@ -237,13 +237,10 @@ describe('#Create Event Controller', () => {
         const response = await createEventController.execute(payload)
 
         expect(response.statusCode).toBe(201)
-        expect(response.body).toEqual({
-            id: '0',
-            name: 'My Event',
-            description: 'My event description',
-            location: location,
-            begin: today,
-            capacity: 10,
-        })
+        expect(response.body.id).toEqual('0')
+        expect(response.body.name).toEqual('My Event')
+        expect(response.body.description).toEqual('My event description')
+        expect(response.body.begin).toEqual(today)
+        expect(response.body.capacity).toEqual(10)
     })
 })
