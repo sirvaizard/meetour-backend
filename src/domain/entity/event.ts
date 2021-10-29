@@ -33,4 +33,8 @@ export default class Event {
         this.attendees.push(user)
         return true
     }
+
+    isFull (): boolean {
+        return this.attendees.length >= this.capacity
+    }
 }
