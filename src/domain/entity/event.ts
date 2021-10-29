@@ -20,4 +20,8 @@ export default class Event {
             this.capacity = capacity
             this.attendees = []
     }
+
+    hasAttendee (user: User): boolean {
+        return this.attendees.includes(user)
+    }
 }
