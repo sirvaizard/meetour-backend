@@ -1,4 +1,5 @@
 import Location from "./location"
+import User from "./user"
 
 export default class Event {
     readonly id: string
@@ -7,6 +8,7 @@ export default class Event {
     readonly location: Location
     readonly begin: Date
     readonly capacity: number
+    private readonly attendees: User[]
 
     constructor (id: string, name: string, description: string,
         location: Location, begin: Date, capacity: number) {
@@ -16,5 +18,6 @@ export default class Event {
             this.location = location
             this.begin = begin
             this.capacity = capacity
+            this.attendees = []
     }
 }
