@@ -9,6 +9,9 @@ export default class EventRepositoryInMemory implements EventRepository {
     constructor () {
         this.events = []
     }
+    findById(id: string): Promise<Event | null | undefined> {
+        return Promise.resolve(this.events.find((event) => event.id === id))
+    }
     addAttendee(event: Event, user: User): Promise<boolean> {
         return Promise.resolve(true)
     }

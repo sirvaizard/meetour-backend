@@ -7,4 +7,6 @@ export default interface EventRepository {
         begin: Date, capacity: number): Promise<Event>
 
     addAttendee (event: Event, user: User): Promise<boolean>
+
+    findById (id: string): Promise<Event | null | undefined>
 }
