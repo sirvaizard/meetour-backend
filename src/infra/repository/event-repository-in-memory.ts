@@ -18,6 +18,7 @@ export default class EventRepositoryInMemory implements EventRepository {
 
     createEvent(name: string, description: string, location: Location, begin: Date, capacity: number): Promise<Event> {
         const event = new Event(String(this.events.length), name, description, location, begin, capacity)
+        this.events.push(event)
         return Promise.resolve(event)
     }
 
