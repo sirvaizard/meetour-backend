@@ -38,7 +38,7 @@ const makeSut = (): SutType => {
     const createLocation = new CreateLocation(locationRepository)
     const createEvent = new CreateEvent(eventRepository, locationRepository)
     const joinEvent = new JoinEvent(eventRepository)
-    const joinEventController = new JoinEventController(userRepository, eventRepository)
+    const joinEventController = new JoinEventController(userRepository, eventRepository, joinEvent)
 
     return {
         createLocation,
@@ -113,6 +113,7 @@ describe('#Join Event Controller', () => {
         const { joinEventController, createUser, createLocation, createEvent } = makeSut()
 
         const validDate = new Date()
+        validDate.setDate(validDate.getDate() + 1)
         validDate.setHours(15)
 
         const location = await createLocation.execute('Location A', '5th Av.', 20, 20, 8, 22)
@@ -128,6 +129,6 @@ describe('#Join Event Controller', () => {
 
         const response = await joinEventController.execute(payload)
 
-        expect(response.statusCode).toBe(400)
+        expect(response.statusCode).toBe(201)
     })
 })

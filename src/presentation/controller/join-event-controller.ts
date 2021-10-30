@@ -1,12 +1,14 @@
 import EventRepository from '../../domain/repository/event-repository';
 import UserRepository from '../../domain/repository/user-repository';
+import JoinEvent from '../../domain/usecase/join-event';
 import Controller from '../protocols/controller'
 import HttpRequest from '../protocols/http-request';
 import HttpResponse from '../protocols/http-response';
 
 export default class JoinEventController implements Controller {
     constructor (private readonly userRepository: UserRepository,
-        private readonly eventRepository: EventRepository) {}
+        private readonly eventRepository: EventRepository,
+        private readonly joinEvent: JoinEvent) {}
 
     async execute(httpRequest: HttpRequest): Promise<HttpResponse> {
         if (!httpRequest.body || !httpRequest.body.userId || !httpRequest.body.eventId) {
@@ -42,11 +44,11 @@ export default class JoinEventController implements Controller {
             })
         }
 
+        await this.joinEvent.execute(event, user)
+
         return Promise.resolve({
-            statusCode: 0,
-            body: {
-                error: 'Bad request'
-            }
+            statusCode: 201,
+            body: {}
         })
     }
 
