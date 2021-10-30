@@ -16,8 +16,8 @@ export default class UserRepositoryInMemory implements UserRepository {
         return Promise.resolve(user)
     }
 
-    findById(): Promise<User | null> {
-        throw new Error("Method not implemented.");
+    findById (id: string): Promise<User | null | undefined> {
+        return Promise.resolve(this.users.find((user) => user.id === id))
     }
 
     findByCpf(cpf: string): Promise<User | null> {
