@@ -9,6 +9,13 @@ export default class EventRepositoryInMemory implements EventRepository {
     constructor () {
         this.events = []
     }
+    findInsideRadius(latitude: number, longitude: number, radius: number): Promise<Event[]> {
+        return Promise.resolve(this.events.filter((event) => {
+            return Math.sqrt(((latitude - event.location.latitude) ** 2) + ((longitude - event.location.longitude) ** 2)) <= radius &&
+                event.begin >= new Date()
+        }))
+    }
+
     findById(id: string): Promise<Event | null | undefined> {
         return Promise.resolve(this.events.find((event) => event.id === id))
     }

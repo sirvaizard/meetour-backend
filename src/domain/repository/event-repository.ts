@@ -9,4 +9,6 @@ export default interface EventRepository {
     addAttendee (event: Event, user: User): Promise<boolean>
 
     findById (id: string): Promise<Event | null | undefined>
+
+    findInsideRadius (latitude: number, longitude: number, radius: number): Promise<Event[]>
 }
