@@ -3,6 +3,15 @@ import UserRepository from '../../domain/repository/user-repository'
 import User from '../../domain/entity/user'
 import db from './connections/postgresql-connection'
 
+type UserDTO = {
+    id: string
+    cpf: string
+    nome: string
+    email: string
+    senha: string
+    data_nascimento: Date
+}
+
 export default class UserRepositoryPostgreSQL implements UserRepository {
     async create(name: string, email: string, password: string, cpf: string, birth: Date): Promise<User> {
 
@@ -11,7 +20,7 @@ export default class UserRepositoryPostgreSQL implements UserRepository {
                 VALUES (${name}, ${email}, ${password}, ${cpf}, ${birth})
             `)
 
-        const userDTO: any = await db.query(sql`
+        const userDTO: UserDTO[] = await db.query(sql`
             SELECT * FROM usuario
             WHERE email = ${email}
         `)
@@ -31,7 +40,7 @@ export default class UserRepositoryPostgreSQL implements UserRepository {
         throw new Error('Method not implemented.')
     }
     async findByCpf(cpf: string): Promise<User | null | undefined> {
-        const userDTO: any = await db.query(sql`
+        const userDTO: UserDTO[] = await db.query(sql`
             SELECT * FROM usuario
             WHERE cpf = ${cpf}
         `)
@@ -50,7 +59,7 @@ export default class UserRepositoryPostgreSQL implements UserRepository {
         return Promise.resolve(null)
     }
     async findByEmail(email: string): Promise<User | null | undefined> {
-        const userDTO: any = await db.query(sql`
+        const userDTO: UserDTO[] = await db.query(sql`
             SELECT * FROM usuario
             WHERE email = ${email}
         `)
