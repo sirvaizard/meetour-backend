@@ -6,18 +6,23 @@ import db from './connections/postgresql-connection'
 export default class UserRepositoryPostgreSQL implements UserRepository {
     async create(name: string, email: string, password: string, cpf: string, birth: Date): Promise<User> {
 
-        let userDTO: any = await db.query(sql`
+        await db.query(sql`
                 INSERT INTO usuario (nome, email, senha, cpf, data_nascimento)
                 VALUES (${name}, ${email}, ${password}, ${cpf}, ${birth})
             `)
 
+        const userDTO: any = await db.query(sql`
+            SELECT * FROM usuario
+            WHERE email = ${email}
+        `)
+
         const user = new User(
-            userDTO.id,
-            userDTO.cpf,
-            userDTO.senha,
-            userDTO.nome,
-            userDTO.data_nascimento,
-            userDTO.email
+            userDTO[0].id,
+            userDTO[0].cpf,
+            userDTO[0].senha,
+            userDTO[0].nome,
+            userDTO[0].data_nascimento,
+            userDTO[0].email
         )
 
         return Promise.resolve(user)
