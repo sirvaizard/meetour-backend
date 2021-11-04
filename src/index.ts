@@ -21,6 +21,7 @@ import BcryptHash from './infra/adapters/bcryptjs-hash'
 import JsonWebToken from './infra/adapters/jsonwebtoken'
 
 import { ExpressControllerAdapter, ExpressMiddlewareAdapter } from './infra/http/express'
+import UserRepositoryPostgreSQL from './infra/repository/user-repository-postgresql'
 
 config()
 
@@ -31,7 +32,7 @@ const token = new JsonWebToken()
 // Repositories
 const locationRepository = new LocationRepositoryInMemory()
 const eventRepository = new EventRepositoryInMemory()
-const userRepository = new UserRepositoryInMemory()
+const userRepository = new UserRepositoryPostgreSQL()//new UserRepositoryInMemory()
 
 // UseCases
 const createLocation = new CreateLocation(locationRepository)
