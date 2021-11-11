@@ -7,21 +7,27 @@ export default class CreateEvent {
     constructor (readonly eventRepository: EventRepository,
         readonly locationRepository: LocationRepository) {}
 
-    async execute (name: string, description: string, location: Location,
+    async execute (name: string, description: string, location: string,
         begin: Date, capacity: number): Promise<Event> {
 
-            if (location.openHour > begin.getHours()) {
+            const locationExists = await this.locationRepository.getLocation(location)
+
+            if (!locationExists) {
+                throw new Error('Cannot create an event in a location that does not exists')
+            }
+
+            if (locationExists.openHour > begin.getHours()) {
                 throw new Error('Cannot create an event before location is opened')
             }
 
-            if (location.closeHour < begin.getHours()) {
+            if (locationExists.closeHour < begin.getHours()) {
                 throw new Error('Cannot create an event after location has been closed')
             }
 
             const event = await this.eventRepository.createEvent(
-                name, description, location, begin, capacity)
+                name, description, locationExists, begin, capacity)
 
-            await this.locationRepository.addEvent(location, event)
+            await this.locationRepository.addEvent(locationExists, event)
 
             return Promise.resolve(event)
     }

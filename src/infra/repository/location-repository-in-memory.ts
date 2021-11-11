@@ -17,8 +17,14 @@ export default class LocationRepositoryInMemory implements LocationRepository {
 
         return Promise.resolve(location)
     }
-    async getLocation(id: string): Promise<Location> {
-        throw new Error("Method not implemented.")
+    async getLocation(id: string): Promise<Location | null> {
+        const location = this.locations.find((location) => location.id === id)
+
+        if (location) {
+            return Promise.resolve(location)
+        }
+
+        return null
     }
 
     async addEvent(location: Location, event: Event): Promise<void> {
