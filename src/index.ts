@@ -3,8 +3,10 @@ import { config } from 'dotenv'
 import cors from 'cors'
 
 import LocationRepositoryInMemory from './infra/repository/location-repository-in-memory'
+import LocationRepositoryPostgreSQL from './infra/repository/location-repository-postgresql'
 import EventRepositoryInMemory from './infra/repository/event-repository-in-memory'
 import UserRepositoryInMemory from './infra/repository/user-repository-in-memory'
+import UserRepositoryPostgreSQL from './infra/repository/user-repository-postgresql'
 
 import CreateLocationController from './presentation/controller/create-location-controller'
 import CreateEventController from './presentation/controller/create-event-controller'
@@ -21,7 +23,6 @@ import BcryptHash from './infra/adapters/bcryptjs-hash'
 import JsonWebToken from './infra/adapters/jsonwebtoken'
 
 import { ExpressControllerAdapter, ExpressMiddlewareAdapter } from './infra/http/express'
-import UserRepositoryPostgreSQL from './infra/repository/user-repository-postgresql'
 
 config()
 
@@ -30,7 +31,7 @@ const hash = new BcryptHash()
 const token = new JsonWebToken()
 
 // Repositories
-const locationRepository = new LocationRepositoryInMemory()
+const locationRepository = new LocationRepositoryPostgreSQL()//new LocationRepositoryInMemory()
 const eventRepository = new EventRepositoryInMemory()
 const userRepository = new UserRepositoryPostgreSQL()//new UserRepositoryInMemory()
 
