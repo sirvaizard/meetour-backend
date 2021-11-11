@@ -5,6 +5,7 @@ import cors from 'cors'
 import LocationRepositoryInMemory from './infra/repository/location-repository-in-memory'
 import LocationRepositoryPostgreSQL from './infra/repository/location-repository-postgresql'
 import EventRepositoryInMemory from './infra/repository/event-repository-in-memory'
+import EventRepositoryPostgreSQL from './infra/repository/event-repository-postgresql'
 import UserRepositoryInMemory from './infra/repository/user-repository-in-memory'
 import UserRepositoryPostgreSQL from './infra/repository/user-repository-postgresql'
 
@@ -32,7 +33,7 @@ const token = new JsonWebToken()
 
 // Repositories
 const locationRepository = new LocationRepositoryPostgreSQL()//new LocationRepositoryInMemory()
-const eventRepository = new EventRepositoryInMemory()
+const eventRepository = new EventRepositoryPostgreSQL()//new EventRepositoryInMemory()
 const userRepository = new UserRepositoryPostgreSQL()//new UserRepositoryInMemory()
 
 // UseCases
