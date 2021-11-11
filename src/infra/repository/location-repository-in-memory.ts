@@ -20,9 +20,7 @@ export default class LocationRepositoryInMemory implements LocationRepository {
     async getLocation(id: string): Promise<Location> {
         throw new Error("Method not implemented.")
     }
-    async getEvents(location: string | Location): Promise<Event[]> {
-        throw new Error("Method not implemented.")
-    }
+
     async addEvent(location: Location, event: Event): Promise<Event[]> {
         location.events.push(event)
 
