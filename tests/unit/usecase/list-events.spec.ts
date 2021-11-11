@@ -35,7 +35,7 @@ describe('#List Events', () => {
         validDate.setHours(15)
 
         const location = await createLocation.execute('My Local', '5th Ave.', 500, 500, 8, 23)
-        await createEvent.execute('My Event', 'Event Desc', location, validDate, 100)
+        await createEvent.execute('My Event', 'Event Desc', location.id, validDate, 100)
 
         const events = await listEvents.execute(100, 100, 100)
 
@@ -50,7 +50,7 @@ describe('#List Events', () => {
         validDate.setHours(15)
 
         const location = await createLocation.execute('My Local', '5th Ave.', 500, 500, 8, 23)
-        const event = await createEvent.execute('My Event', 'Event Desc', location, validDate, 100)
+        const event = await createEvent.execute('My Event', 'Event Desc', location.id, validDate, 100)
 
         const events = await listEvents.execute(450, 450, 100)
 
@@ -66,7 +66,7 @@ describe('#List Events', () => {
         yesterday.setHours(15)
 
         const location = await createLocation.execute('My Local', '5th Ave.', 500, 500, 8, 23)
-        await createEvent.execute('My Event', 'Event Desc', location, yesterday, 100)
+        await createEvent.execute('My Event', 'Event Desc', location.id, yesterday, 100)
 
         const events = await listEvents.execute(450, 450, 100)
 

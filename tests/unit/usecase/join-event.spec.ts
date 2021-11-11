@@ -55,7 +55,7 @@ describe('#Join Event', () => {
         const validTime = new Date()
         validTime.setDate(validTime.getDate() + 1)
         validTime.setHours(12)
-        const event = await createEvent.execute('Event 1', 'My event 1', location, validTime, 100)
+        const event = await createEvent.execute('Event 1', 'My event 1', location.id, validTime, 100)
         const user = await createUser.execute('John Doe', 'john.doe@mail.com', '111111', '999999', new Date())
 
         await joinEvent.execute(event, user)
@@ -70,7 +70,7 @@ describe('#Join Event', () => {
         const validTime = new Date()
         validTime.setDate(validTime.getDate() + 1)
         validTime.setHours(12)
-        const event = await createEvent.execute('Event 1', 'My event 1', location, validTime, 100)
+        const event = await createEvent.execute('Event 1', 'My event 1', location.id, validTime, 100)
         const user = await createUser.execute('John Doe', 'john.doe@mail.com', '111111', '999999', new Date())
 
         await joinEvent.execute(event, user)
@@ -93,7 +93,7 @@ describe('#Join Event', () => {
         const validTime = new Date()
         validTime.setDate(validTime.getDate() + 1)
         validTime.setHours(12)
-        const event = await createEvent.execute('Event 1', 'My event 1', location, validTime, 1)
+        const event = await createEvent.execute('Event 1', 'My event 1', location.id, validTime, 1)
 
         await joinEvent.execute(event,
             await createUser.execute('John Doe', 'john.doe@mail.com', '111111', '999999', new Date()))
@@ -116,7 +116,7 @@ describe('#Join Event', () => {
         const location = await createLocation.execute('Location 1', 'Main Av.', 25, 25, 8, 18)
         const validTime = new Date()
         validTime.setHours(12)
-        const event = await createEvent.execute('Event 1', 'My event 1', location, validTime, 1)
+        const event = await createEvent.execute('Event 1', 'My event 1', location.id, validTime, 1)
 
         let error
         try {

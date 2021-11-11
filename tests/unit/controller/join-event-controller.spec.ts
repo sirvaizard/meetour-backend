@@ -117,7 +117,7 @@ describe('#Join Event Controller', () => {
         validDate.setHours(15)
 
         const location = await createLocation.execute('Location A', '5th Av.', 20, 20, 8, 22)
-        const event = await createEvent.execute('Event A', 'My Event A', location, validDate, 50)
+        const event = await createEvent.execute('Event A', 'My Event A', location.id, validDate, 50)
         const user = await createUser.execute('John Doe', 'john.doe@mail.com', '123123', '12312312312', new Date())
 
         const payload = {

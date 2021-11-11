@@ -228,7 +228,7 @@ describe('#Create Event Controller', () => {
             body: {
                 name: 'My Event',
                 description: 'My event description',
-                location: location,
+                location: location.id,
                 begin: today,
                 capacity: 10
             }
