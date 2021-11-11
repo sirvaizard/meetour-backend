@@ -56,8 +56,11 @@ export default class LocationRepositoryPostgreSQL implements LocationRepository 
 
         return Promise.resolve(null)
     }
-    addEvent(location: Location, event: Event): Promise<Event[]> {
-        throw new Error("Method not implemented.");
+    async addEvent(location: Location, event: Event): Promise<void> {
+        await db.query(sql`
+            INSERT INTO (local, encontro)
+            VALUES (${location.id}, ${event.id})
+        `)
     }
 
 }
