@@ -27,16 +27,16 @@ export default class CreateEventController implements Controller {
 
         try {
             const { name, description, location, begin, capacity } = httpRequest.body
-            const event = await this.createEvent.execute(name, description, location, begin, capacity)
+            const event = await this.createEvent.execute(name, description, location, new Date(begin), capacity)
 
             return Promise.resolve({
                 statusCode: 201,
                 body: event
             })
-        } catch {
+        } catch (error) {
             return Promise.resolve({
                 statusCode: 400,
-                body: new Error()
+                body: error
             })
         }
     }
