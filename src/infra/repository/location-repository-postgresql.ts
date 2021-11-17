@@ -40,7 +40,7 @@ export default class LocationRepositoryPostgreSQL implements LocationRepository 
 
     async getLocation(id: string): Promise<Location | null> {
         const locationDTO: LocationDTO[] = await db.query(sql`
-            SELECT * FROM usuario
+            SELECT * FROM localidade
             WHERE id = ${id}
         `)
 
@@ -58,7 +58,7 @@ export default class LocationRepositoryPostgreSQL implements LocationRepository 
     }
     async addEvent(location: Location, event: Event): Promise<void> {
         await db.query(sql`
-            INSERT INTO (local, encontro)
+            INSERT INTO encontro_local (local, encontro)
             VALUES (${location.id}, ${event.id})
         `)
     }
