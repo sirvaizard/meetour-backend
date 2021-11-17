@@ -99,8 +99,10 @@ describe('#Join Event Controller', () => {
 
         const payload = {
             body: {
-                userId: user.id,
-                eventId: 'invalid event id'
+                userId: user.id
+            },
+            params: {
+                id: 'invalid event id'
             }
         }
 
@@ -122,8 +124,10 @@ describe('#Join Event Controller', () => {
 
         const payload = {
             body: {
-                userId: user.id,
-                eventId: event.id
+                userId: user.id
+            },
+            params: {
+                id: event.id
             }
         }
 

@@ -11,7 +11,7 @@ export default class JoinEventController implements Controller {
         private readonly joinEvent: JoinEvent) {}
 
     async execute(httpRequest: HttpRequest): Promise<HttpResponse> {
-        if (!httpRequest.body || !httpRequest.body.userId || !httpRequest.body.eventId) {
+        if (!httpRequest.body || !httpRequest.body.userId || !httpRequest.params || !httpRequest.params.id) {
             return Promise.resolve({
                 statusCode: 400,
                 body: {
@@ -32,7 +32,7 @@ export default class JoinEventController implements Controller {
             })
         }
 
-        const { eventId } = httpRequest.body
+        const { id: eventId } = httpRequest.params
 
         const event = await this.eventRepository.findById(eventId)
         if (!event) {
