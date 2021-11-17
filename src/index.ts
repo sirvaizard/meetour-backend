@@ -13,12 +13,14 @@ import CreateLocationController from './presentation/controller/create-location-
 import CreateEventController from './presentation/controller/create-event-controller'
 import CreateUserController from './presentation/controller/create-user-controller'
 import AuthenticateUserController from './presentation/controller/authenticate-user-controller'
+import JoinEventController from './presentation/controller/join-event-controller'
 import AuthenticationMiddleware from './presentation/controller/authentication-middleware'
 
 import CreateLocation from './domain/usecase/create-location'
 import CreateEvent from './domain/usecase/create-event'
 import CreateUser from './domain/usecase/create-user'
 import AuthenticateUser from './domain/usecase/authenticate-user'
+import JoinEvent from './domain/usecase/join-event'
 
 import BcryptHash from './infra/adapters/bcryptjs-hash'
 import JsonWebToken from './infra/adapters/jsonwebtoken'
@@ -41,12 +43,14 @@ const createLocation = new CreateLocation(locationRepository)
 const createEvent = new CreateEvent(eventRepository, locationRepository)
 const createUser = new CreateUser(userRepository, hash)
 const authenticateUser = new AuthenticateUser(userRepository, hash, token, process.env.APP_SECRET ?? '')
+const joinEvent = new JoinEvent(eventRepository)
 
 // Controllers
 const createLocationController = new CreateLocationController(createLocation)
 const createEventController = new CreateEventController(createEvent)
 const createUserController = new CreateUserController(createUser)
 const authenticateUserController = new AuthenticateUserController(authenticateUser)
+const joinEventController = new JoinEventController(userRepository, eventRepository, joinEvent)
 const authenticationMiddleware = new AuthenticationMiddleware(token, process.env.APP_SECRET ?? '')
 
 const router = Router()
@@ -60,6 +64,7 @@ router.use(ExpressMiddlewareAdapter.create(authenticationMiddleware))
 
 router.post('/api/location', ExpressControllerAdapter.create(createLocationController))
 router.post('/api/event/', ExpressControllerAdapter.create(createEventController))
+router.post('/api/event/:id/join', ExpressControllerAdapter.create(joinEventController))
 
 app
     .use(express.json())
