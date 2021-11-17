@@ -1,8 +1,8 @@
 import { sql } from '@databases/pg'
 import EventRepository from '../../domain/repository/event-repository'
 import Event from '../../domain/entity/event'
+import Location from '../../domain/entity/location'
 import db from './connections/postgresql-connection'
-import location from '../../domain/entity/location'
 import user from '../../domain/entity/user'
 
 type EventDTO = {
@@ -15,7 +15,7 @@ type EventDTO = {
 }
 
 export default class EventRepositoryPostgreSQL implements EventRepository {
-    async createEvent(name: string, description: string, location: location, begin: Date, capacity: number): Promise<Event> {
+    async createEvent(name: string, description: string, location: Location, begin: Date, capacity: number): Promise<Event> {
         const eventDTO: EventDTO[] = await db.query(sql`
                     INSERT INTO encontro (nome, data, tema, descricao, capacidade)
                     VALUES (${name}, ${begin}, '', ${description}, ${capacity})
@@ -28,11 +28,53 @@ export default class EventRepositoryPostgreSQL implements EventRepository {
 
         return Promise.resolve(event)
     }
-    addAttendee(event: Event, user: user): Promise<boolean> {
-        throw new Error('Method not implemented.')
+    async addAttendee(event: Event, user: user): Promise<boolean> {
+        try {
+            await db.query(sql`
+                INSERT INTO participa (usuario, encontro)
+                VALUES (${user.id}, ${event.id})
+            `)
+
+            return Promise.resolve(true)
+        } catch (error) {
+            return Promise.resolve(false)
+        }
     }
-    findById(id: string): Promise<Event | null | undefined> {
-        throw new Error('Method not implemented.')
+    async findById(id: string): Promise<Event | null | undefined> {
+        const eventDTO: EventDTO[] = await db.query(sql`
+            SELECT * FROM encontro
+            WHERE id = ${id}
+        `)
+
+        if (eventDTO.length > 0) {
+            const locationDTO = await db.query(sql`
+                SELECT * FROM encontro_local
+                LEFT JOIN localidade
+                ON encontro_local.local = localidade.id
+                WHERE encontro_local.encontro = ${id};
+            `)
+
+            const location = new Location(
+                locationDTO[0].id,
+                locationDTO[0].nome,
+                `${locationDTO[0].rua}, ${locationDTO[0].numero}`,
+                locationDTO[0].longitude,
+                locationDTO[0].latitude,
+                0,
+                23
+            )
+
+            return Promise.resolve(new Event(
+                eventDTO[0].id,
+                eventDTO[0].nome,
+                eventDTO[0].descricao,
+                location,
+                new Date(eventDTO[0].data),
+                eventDTO[0].capacidade
+            ))
+        }
+
+        return Promise.resolve(null)
     }
     findInsideRadius(latitude: number, longitude: number, radius: number): Promise<Event[]> {
         throw new Error('Method not implemented.')
