@@ -36,8 +36,24 @@ export default class UserRepositoryPostgreSQL implements UserRepository {
 
         return Promise.resolve(user)
     }
-    findById(id: string): Promise<User | null | undefined> {
-        throw new Error('Method not implemented.')
+    async findById(id: string): Promise<User | null | undefined> {
+        const userDTO: UserDTO[] = await db.query(sql`
+            SELECT * FROM usuario
+            WHERE id = ${id}
+        `)
+
+        if (userDTO.length > 0) {
+            return Promise.resolve(new User(
+                userDTO[0].id,
+                userDTO[0].cpf,
+                userDTO[0].senha,
+                userDTO[0].nome,
+                userDTO[0].data_nascimento,
+                userDTO[0].email
+            ))
+        }
+
+        return Promise.resolve(null)
     }
     async findByCpf(cpf: string): Promise<User | null | undefined> {
         const userDTO: UserDTO[] = await db.query(sql`
