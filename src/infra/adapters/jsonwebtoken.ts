@@ -11,9 +11,8 @@ export default class JsonWebToken implements Token {
         const [prefix, rawToken] = token.split(' ')
 
         try {
-            const decoded = jwt.verify(rawToken, secret).toString()
-
-            return Promise.resolve(decoded)
+            const decoded = jwt.verify(rawToken, secret) as any
+            return Promise.resolve(decoded.id)
         } catch {
             return Promise.resolve(null)
         }
