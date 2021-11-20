@@ -69,7 +69,7 @@ router.use(ExpressMiddlewareAdapter.create(authenticationMiddleware))
 
 router.post('/api/location', ExpressControllerAdapter.create(createLocationController))
 router.post('/api/event/', ExpressControllerAdapter.create(createEventController))
-router.post('/api/event/', ExpressControllerAdapter.create(listEventsController))
+router.get('/api/event/', ExpressControllerAdapter.create(listEventsController))
 router.post('/api/event/:id/join', ExpressControllerAdapter.create(joinEventController))
 
 app

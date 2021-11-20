@@ -31,7 +31,7 @@ describe('#List Events Controller', () => {
         const { listEventsController } = makeSut()
 
         const payload = {
-            body: {
+            query: {
                 longitude: 10,
                 radius: 10
             }
@@ -46,7 +46,7 @@ describe('#List Events Controller', () => {
         const { listEventsController } = makeSut()
 
         const payload = {
-            body: {
+            query: {
                 latitude: 10,
                 radius: 10
             }
@@ -61,7 +61,7 @@ describe('#List Events Controller', () => {
         const { listEventsController } = makeSut()
 
         const payload = {
-            body: {
+            query: {
                 latitude: 10,
                 longitude: 10
             }
@@ -76,7 +76,7 @@ describe('#List Events Controller', () => {
         const { listEventsController } = makeSut()
 
         const payload = {
-            body: {
+            query: {
                 latitude: 10,
                 longitude: 10,
                 radius: 10

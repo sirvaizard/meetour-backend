@@ -11,7 +11,7 @@ export default class ListEventsController implements Controller {
 
         const missingFields = []
         for (const field of requiredFields) {
-            if (!httpRequest.body[field]) {
+            if (!httpRequest.query[field]) {
                 missingFields.push(field)
             }
         }
@@ -25,7 +25,7 @@ export default class ListEventsController implements Controller {
             })
         }
 
-        const { latitude, longitude, radius } = httpRequest.body
+        const { latitude, longitude, radius } = httpRequest.query
 
         const events = await this.listEvents.execute(latitude, longitude, radius)
 
