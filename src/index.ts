@@ -23,6 +23,7 @@ import CreateUser from './domain/usecase/create-user'
 import AuthenticateUser from './domain/usecase/authenticate-user'
 import JoinEvent from './domain/usecase/join-event'
 import ListEvents from './domain/usecase/list-events'
+import ShowUser from './domain/usecase/show-user'
 
 import BcryptHash from './infra/adapters/bcryptjs-hash'
 import JsonWebToken from './infra/adapters/jsonwebtoken'
@@ -68,7 +69,7 @@ router.use(ExpressMiddlewareAdapter.create(authenticationMiddleware))
 
 router.post('/api/location', ExpressControllerAdapter.create(createLocationController))
 router.post('/api/event/', ExpressControllerAdapter.create(createEventController))
-router.get('/api/event/', ExpressControllerAdapter.create(listEventsController))
+router.post('/api/event/', ExpressControllerAdapter.create(listEventsController))
 router.post('/api/event/:id/join', ExpressControllerAdapter.create(joinEventController))
 
 app
