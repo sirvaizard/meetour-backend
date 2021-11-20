@@ -9,9 +9,9 @@ export default class LocationRepositoryInMemory implements LocationRepository {
         this.locations = []
     }
 
-    async createLocation(name: string, address: string, latitude: number, longitude: number, openHour: number, closeHour: number): Promise<Location> {
+    async createLocation(name: string, address: string, latitude: number, longitude: number, openHour: number, closeHour: number, image: string): Promise<Location> {
         const location = new Location(String(this.locations.length), name, address,
-            longitude, latitude, openHour, closeHour)
+            longitude, latitude, openHour, closeHour, image)
 
         this.locations.push(location)
 

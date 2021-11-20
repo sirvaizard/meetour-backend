@@ -5,8 +5,8 @@ export default class CreateLocation {
     constructor (readonly locationRepository: LocationRepository) {}
 
     async execute (name: string, address: string, latitude: number,
-        longitude: number, openHour: number, closeHour: number): Promise<Location> {
+        longitude: number, openHour: number, closeHour: number, image: string): Promise<Location> {
             return this.locationRepository.createLocation(name, address, latitude,
-                longitude, openHour, closeHour)
+                longitude, openHour, closeHour, image)
     }
 }

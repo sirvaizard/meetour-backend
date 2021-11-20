@@ -27,9 +27,9 @@ export default class CreateLocationController implements Controller {
         }
 
         try {
-            const { name, address, latitude, longitude, openHour, closeHour } = httpRequest.body
+            const { name, address, latitude, longitude, openHour, closeHour, image } = httpRequest.body
             const location = await this.createLocation.execute(name, address, latitude,
-                longitude, openHour, closeHour)
+                longitude, openHour, closeHour, image)
 
             return Promise.resolve({
                 statusCode: 201,

@@ -11,7 +11,7 @@ describe('#Event', () => {
         const today = new Date()
         today.setHours(12)
 
-        const location = await locationRepository.createLocation('MASP', 'Av. Paulista 123', 1, 1, 8, 18)
+        const location = await locationRepository.createLocation('MASP', 'Av. Paulista 123', 1, 1, 8, 18, 'image')
         const event = await createEvent.execute('My Event', 'My cool event description', location.id, today, 100)
 
         expect(event.id).toEqual('0')
@@ -47,7 +47,7 @@ describe('#Event', () => {
         const today = new Date()
         today.setHours(12)
 
-        const location = await locationRepository.createLocation('MASP', 'Av. Paulista 123', 1, 1, 8, 18)
+        const location = await locationRepository.createLocation('MASP', 'Av. Paulista 123', 1, 1, 8, 18, 'image')
         const event = await createEvent.execute('My Event', 'My cool event description', location.id, today, 100)
 
         expect(location.events).toContain(event)

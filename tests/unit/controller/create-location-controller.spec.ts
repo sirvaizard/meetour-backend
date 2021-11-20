@@ -155,13 +155,14 @@ describe('#Create Location Controller', () => {
                 latitude: 125,
                 longitude: 100,
                 openHour: 8,
-                closeHour: 18
+                closeHour: 18,
+                image: 'image'
             }
         }
 
         await createLocationController.execute(payload)
         expect(createLocationSpy).toHaveBeenCalledWith(
-            'MASP', 'Av. Paulista 123', 125, 100, 8, 18
+            'MASP', 'Av. Paulista 123', 125, 100, 8, 18, 'image'
         )
     })
 
@@ -177,7 +178,8 @@ describe('#Create Location Controller', () => {
                 latitude: 125,
                 longitude: 100,
                 openHour: 8,
-                closeHour: 18
+                closeHour: 18,
+                image: 'image'
             }
         }
 
@@ -192,6 +194,7 @@ describe('#Create Location Controller', () => {
             longitude: 100,
             openHour: 8,
             closeHour: 18,
+            image: 'image',
             events: []
         })
     })

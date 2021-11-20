@@ -51,7 +51,7 @@ describe('#Join Event', () => {
     it('should be able for a user to join an event', async () => {
         const { joinEvent, createUser, createEvent, createLocation } = makeSut()
 
-        const location = await createLocation.execute('Location 1', 'Main Av.', 25, 25, 8, 18)
+        const location = await createLocation.execute('Location 1', 'Main Av.', 25, 25, 8, 18, 'image')
         const validTime = new Date()
         validTime.setDate(validTime.getDate() + 1)
         validTime.setHours(12)
@@ -66,7 +66,7 @@ describe('#Join Event', () => {
     it('should not be able to insert an user twice in the same event', async () => {
         const { joinEvent, createUser, createEvent, createLocation } = makeSut()
 
-        const location = await createLocation.execute('Location 1', 'Main Av.', 25, 25, 8, 18)
+        const location = await createLocation.execute('Location 1', 'Main Av.', 25, 25, 8, 18, 'image')
         const validTime = new Date()
         validTime.setDate(validTime.getDate() + 1)
         validTime.setHours(12)
@@ -89,7 +89,7 @@ describe('#Join Event', () => {
     it('should not be able to insert an user in an event at full capacity', async () => {
         const { joinEvent, createUser, createEvent, createLocation } = makeSut()
 
-        const location = await createLocation.execute('Location 1', 'Main Av.', 25, 25, 8, 18)
+        const location = await createLocation.execute('Location 1', 'Main Av.', 25, 25, 8, 18, 'image')
         const validTime = new Date()
         validTime.setDate(validTime.getDate() + 1)
         validTime.setHours(12)
@@ -113,7 +113,7 @@ describe('#Join Event', () => {
     it('should not be able to insert an user in an event that has already happened', async () => {
         const { joinEvent, createUser, createEvent, createLocation } = makeSut()
 
-        const location = await createLocation.execute('Location 1', 'Main Av.', 25, 25, 8, 18)
+        const location = await createLocation.execute('Location 1', 'Main Av.', 25, 25, 8, 18, 'image')
         const validTime = new Date()
         validTime.setHours(12)
         const event = await createEvent.execute('Event 1', 'My event 1', location.id, validTime, 1)

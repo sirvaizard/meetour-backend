@@ -12,6 +12,7 @@ type EventDTO = {
     tema?: string
     descricao: string
     capacidade: number
+    imagem: string
 }
 
 export default class EventRepositoryPostgreSQL implements EventRepository {
@@ -61,7 +62,8 @@ export default class EventRepositoryPostgreSQL implements EventRepository {
                 locationDTO[0].longitude,
                 locationDTO[0].latitude,
                 0,
-                23
+                23,
+                locationDTO[0].imagem
             )
 
             return Promise.resolve(new Event(
@@ -98,7 +100,8 @@ export default class EventRepositoryPostgreSQL implements EventRepository {
                 locationDTO[0].longitude,
                 locationDTO[0].latitude,
                 0,
-                23
+                23,
+                locationDTO[0].imagem
             )
 
             events.push(new Event(id, nome, descricao, location, data, capacidade))

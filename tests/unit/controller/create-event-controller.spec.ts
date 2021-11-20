@@ -11,7 +11,7 @@ describe('#Create Event Controller', () => {
         const createEventController = new CreateEventController(createEvent)
 
         const location = await locationRepository.createLocation(
-            'My Event', 'Av. Paulista 123', 10, 10, 8, 18)
+            'My Event', 'Av. Paulista 123', 10, 10, 8, 18, 'image')
 
         const now = new Date()
         const payload = {
@@ -34,7 +34,7 @@ describe('#Create Event Controller', () => {
         const createEventController = new CreateEventController(createEvent)
 
         const location = await locationRepository.createLocation(
-            'My Event', 'Av. Paulista 123', 10, 10, 8, 18)
+            'My Event', 'Av. Paulista 123', 10, 10, 8, 18, 'image')
 
         const now = new Date()
         const payload = {
@@ -77,7 +77,7 @@ describe('#Create Event Controller', () => {
         const createEventController = new CreateEventController(createEvent)
 
         const location = await locationRepository.createLocation(
-            'My Event', 'Av. Paulista 123', 10, 10, 8, 18)
+            'My Event', 'Av. Paulista 123', 10, 10, 8, 18, 'image')
 
         const payload = {
             body: {
@@ -99,7 +99,7 @@ describe('#Create Event Controller', () => {
         const createEventController = new CreateEventController(createEvent)
 
         const location = await locationRepository.createLocation(
-            'My Event', 'Av. Paulista 123', 10, 10, 8, 18)
+            'My Event', 'Av. Paulista 123', 10, 10, 8, 18, 'image')
 
         const now = new Date()
         const payload = {
@@ -148,7 +148,7 @@ describe('#Create Event Controller', () => {
         const createLocationSpy = jest.spyOn(createEvent, 'execute')
 
         const location = await locationRepository.createLocation(
-            'My Event', 'Av. Paulista 123', 10, 10, 8, 18)
+            'My Event', 'Av. Paulista 123', 10, 10, 8, 18, 'image')
 
         const now = new Date()
         const payload = {
@@ -174,7 +174,7 @@ describe('#Create Event Controller', () => {
         const createEventController = new CreateEventController(createEvent)
 
         const location = await locationRepository.createLocation(
-            'My Event', 'Av. Paulista 123', 10, 10, 8, 18)
+            'My Event', 'Av. Paulista 123', 10, 10, 8, 18, 'image')
 
         const payload = {
             body: {
@@ -197,7 +197,7 @@ describe('#Create Event Controller', () => {
         const createEventController = new CreateEventController(createEvent)
 
         const location = await locationRepository.createLocation(
-            'My Event', 'Av. Paulista 123', 10, 10, 8, 18)
+            'My Event', 'Av. Paulista 123', 10, 10, 8, 18, 'image')
 
         const payload = {
             body: {
@@ -220,7 +220,7 @@ describe('#Create Event Controller', () => {
         const createEventController = new CreateEventController(createEvent)
 
         const location = await locationRepository.createLocation(
-            'My Event', 'Av. Paulista 123', 10, 10, 8, 18)
+            'My Event', 'Av. Paulista 123', 10, 10, 8, 18, 'image')
 
         const today = new Date(2021, 1, 1, 12, 0, 0, 0)
 

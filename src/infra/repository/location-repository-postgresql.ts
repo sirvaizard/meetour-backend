@@ -12,6 +12,7 @@ type LocationDTO = {
     cep: string
     latitude: number
     longitude: number
+    imagem: string
     acess_fisica?: boolean
     acess_visual?: boolean
     acess_auditiva?: boolean
@@ -28,11 +29,11 @@ export default class LocationRepositoryPostgreSQL implements LocationRepository 
         `)
 
         const { id, nome, rua, numero, cep, latitude: latitide_,
-            longitude: longitude_ , acess_visual, acess_fisica, acess_auditiva
+            longitude: longitude_ , acess_visual, acess_fisica, imagem
         } = locationDTO[0]
 
         const user = new Location(
-            id, nome, `${rua}, ${numero}`, longitude_, latitide_, 0, 23
+            id, nome, `${rua}, ${numero}`, longitude_, latitide_, 0, 23, imagem
         )
 
         return Promise.resolve(user)
@@ -46,11 +47,11 @@ export default class LocationRepositoryPostgreSQL implements LocationRepository 
 
         if (locationDTO.length) {
             const { id, nome, rua, numero, cep, latitude: latitide_,
-                longitude: longitude_ , acess_visual, acess_fisica, acess_auditiva
+                longitude: longitude_ , acess_visual, acess_fisica, acess_auditiva, imagem
             } = locationDTO[0]
 
             return Promise.resolve(new Location(
-                id, nome, `${rua}, ${numero}`, longitude_, latitide_, 0, 23
+                id, nome, `${rua}, ${numero}`, longitude_, latitide_, 0, 23, imagem
             ))
         }
 

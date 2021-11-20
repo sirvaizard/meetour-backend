@@ -8,7 +8,7 @@ describe('#Location', () => {
         const createLocation = new CreateLocation(locationRepository)
 
         const location = await createLocation.execute(
-            'MASP', 'Av. Paulista 123', 1, 1, 8, 18)
+            'MASP', 'Av. Paulista 123', 1, 1, 8, 18, 'image')
 
         expect(location).toEqual({
             id: '0',
@@ -18,6 +18,7 @@ describe('#Location', () => {
             longitude: 1,
             openHour: 8,
             closeHour: 18,
+            image: 'image',
             events: []
         })
     })
