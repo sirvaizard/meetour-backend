@@ -40,7 +40,7 @@ describe('#Show User Controller', () => {
         const { showUserController } = makeSut()
 
         const payload = {
-            body: {
+            params: {
 
             }
         }
@@ -57,7 +57,7 @@ describe('#Show User Controller', () => {
             '77777777777', new Date())
 
         const payload = {
-            body: {
+            params: {
                 id: user.id
             }
         }
@@ -72,7 +72,7 @@ describe('#Show User Controller', () => {
         const { showUserController } = makeSut()
 
         const payload = {
-            body: {
+            params: {
                 id: 'invalid id'
             }
         }

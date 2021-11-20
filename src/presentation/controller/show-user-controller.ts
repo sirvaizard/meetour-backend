@@ -7,14 +7,14 @@ export default class ShowUserController implements Controller {
     constructor (private readonly showUser: ShowUser) {}
 
     async execute(httpRequest: HttpRequest): Promise<HttpResponse> {
-        if (!httpRequest.body.id) {
+        if (!httpRequest.params.id) {
             return Promise.resolve({
                 statusCode: 400,
                 body: {}
             })
         }
 
-        const user = await this.showUser.execute(httpRequest.body.id)
+        const user = await this.showUser.execute(httpRequest.params.id)
 
         if (user) {
             return Promise.resolve({
