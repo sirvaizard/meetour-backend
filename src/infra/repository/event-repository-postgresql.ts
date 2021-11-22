@@ -109,4 +109,42 @@ export default class EventRepositoryPostgreSQL implements EventRepository {
 
         return events
     }
+
+    async getUserScheduling(user: user): Promise<Event[]> {
+        const eventsDTO: EventDTO[] = await db.query(sql`
+            SELECT * FROM participa p
+            LEFT JOIN encontro e
+            ON p.encontro = e.id
+            WHERE p.usuario = 1
+            AND e.data >= now()
+            ORDER BY e.data ASC;
+        `)
+
+        const events: Event[] = []
+        for (const eventDTO of eventsDTO) {
+            const { id, nome, data, tema, descricao, capacidade } = eventDTO
+
+            const locationDTO = await db.query(sql`
+                SELECT * FROM encontro_local
+                LEFT JOIN localidade
+                ON encontro_local.local = localidade.id
+                WHERE encontro_local.encontro = ${id};
+            `)
+
+            const location = new Location(
+                locationDTO[0].id,
+                locationDTO[0].nome,
+                `${locationDTO[0].rua}, ${locationDTO[0].numero}`,
+                locationDTO[0].longitude,
+                locationDTO[0].latitude,
+                0,
+                23,
+                locationDTO[0].imagem
+            )
+
+            events.push(new Event(id, nome, descricao, location, data, capacidade))
+        }
+
+        return events
+    }
 }

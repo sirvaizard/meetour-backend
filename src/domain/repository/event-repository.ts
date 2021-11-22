@@ -11,4 +11,6 @@ export default interface EventRepository {
     findById (id: string): Promise<Event | null | undefined>
 
     findInsideRadius (latitude: number, longitude: number, radius: number): Promise<Event[]>
+
+    getUserScheduling (user: User): Promise<Event[]>
 }
