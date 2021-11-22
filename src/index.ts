@@ -16,6 +16,7 @@ import AuthenticateUserController from './presentation/controller/authenticate-u
 import JoinEventController from './presentation/controller/join-event-controller'
 import ListEventsController from './presentation/controller/list-events-controller'
 import ShowUserController from './presentation/controller/show-user-controller'
+import ShowEventSchedulingController from './presentation/controller/show-event-scheduling-controller'
 import AuthenticationMiddleware from './presentation/controller/authentication-middleware'
 
 import CreateLocation from './domain/usecase/create-location'
@@ -25,6 +26,7 @@ import AuthenticateUser from './domain/usecase/authenticate-user'
 import JoinEvent from './domain/usecase/join-event'
 import ListEvents from './domain/usecase/list-events'
 import ShowUser from './domain/usecase/show-user'
+import ShowEventScheduling from './domain/usecase/show-event-scheduling'
 
 import BcryptHash from './infra/adapters/bcryptjs-hash'
 import JsonWebToken from './infra/adapters/jsonwebtoken'
@@ -50,6 +52,7 @@ const authenticateUser = new AuthenticateUser(userRepository, hash, token, proce
 const joinEvent = new JoinEvent(eventRepository)
 const listEvents = new ListEvents(eventRepository)
 const showUser = new ShowUser(userRepository)
+const showEventScheduling = new ShowEventScheduling(eventRepository)
 
 // Controllers
 const createLocationController = new CreateLocationController(createLocation)
@@ -59,6 +62,7 @@ const authenticateUserController = new AuthenticateUserController(authenticateUs
 const joinEventController = new JoinEventController(userRepository, eventRepository, joinEvent)
 const listEventsController = new ListEventsController(listEvents)
 const showUserController = new ShowUserController(showUser)
+const showEventSchedulingController = new ShowEventSchedulingController(userRepository, showEventScheduling)
 const authenticationMiddleware = new AuthenticationMiddleware(token, process.env.APP_SECRET ?? '')
 
 const router = Router()
@@ -75,6 +79,7 @@ router.post('/api/event/', ExpressControllerAdapter.create(createEventController
 router.get('/api/event/', ExpressControllerAdapter.create(listEventsController))
 router.post('/api/event/:id/join', ExpressControllerAdapter.create(joinEventController))
 router.get('/api/user/:id', ExpressControllerAdapter.create(showUserController))
+router.get('/api/scheduling', ExpressControllerAdapter.create(showEventSchedulingController))
 
 app
     .use(express.json())
