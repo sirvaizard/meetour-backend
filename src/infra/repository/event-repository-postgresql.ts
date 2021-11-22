@@ -115,7 +115,7 @@ export default class EventRepositoryPostgreSQL implements EventRepository {
             SELECT * FROM participa p
             LEFT JOIN encontro e
             ON p.encontro = e.id
-            WHERE p.usuario = 1
+            WHERE p.usuario = ${user.id}
             AND e.data >= now()
             ORDER BY e.data ASC;
         `)
