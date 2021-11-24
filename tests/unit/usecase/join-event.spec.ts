@@ -115,6 +115,7 @@ describe('#Join Event', () => {
 
         const location = await createLocation.execute('Location 1', 'Main Av.', 25, 25, 8, 18, 'image')
         const validTime = new Date()
+        validTime.setDate(validTime.getDate() - 1)
         validTime.setHours(12)
         const event = await createEvent.execute('Event 1', 'My event 1', location.id, validTime, 1)
 
