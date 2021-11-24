@@ -13,4 +13,6 @@ export default interface EventRepository {
     findInsideRadius (latitude: number, longitude: number, radius: number): Promise<Event[]>
 
     getUserScheduling (user: User): Promise<Event[]>
+
+    getAttendees (event: Event): Promise<User[]>
 }

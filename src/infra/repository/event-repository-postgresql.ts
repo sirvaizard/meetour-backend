@@ -26,6 +26,26 @@ type UserDTO = {
 }
 
 export default class EventRepositoryPostgreSQL implements EventRepository {
+
+    async getAttendees(event: Event): Promise<user[]> {
+        const usersDTO: UserDTO[] = await db.query(sql`
+            SELECT * FROM participa p
+            LEFT JOIN usuario u
+            ON p.usuario = u.id
+            WHERE p.encontro = ${event.id};
+        `)
+
+        const users: User[] = []
+
+        for (const userDTO of usersDTO) {
+            const { id, cpf, data_nascimento, nome, email, senha } = userDTO
+            const user = new User(id, cpf, senha, nome, data_nascimento, email)
+
+            users.push(user)
+        }
+
+        return Promise.resolve(users)
+    }
     async createEvent(name: string, description: string, location: Location, begin: Date, capacity: number): Promise<Event> {
         const eventDTO: EventDTO[] = await db.query(sql`
                     INSERT INTO encontro (nome, data, tema, descricao, capacidade)

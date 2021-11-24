@@ -10,6 +10,10 @@ export default class EventRepositoryInMemory implements EventRepository {
         this.events = []
     }
 
+    getAttendees(event: Event): Promise<User[]> {
+        return Promise.resolve(event.getAttendees())
+    }
+
     getUserScheduling(user: User): Promise<Event[]> {
         return Promise.resolve(this.events.filter((event) => event.hasAttendee(user)))
     }
