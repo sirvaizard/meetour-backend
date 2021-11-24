@@ -26,13 +26,11 @@ export default class AuthenticateUserController implements Controller {
 
         try {
             const { email, password } = httpRequest.body
-            const token = await this.authenticateUser.execute(email, password)
+            const authenticationData = await this.authenticateUser.execute(email, password)
 
             return Promise.resolve({
                 statusCode: 200,
-                body: {
-                    token
-                }
+                body: authenticationData
             })
         } catch (error) {
             return Promise.resolve({

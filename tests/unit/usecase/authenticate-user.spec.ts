@@ -53,11 +53,14 @@ describe('#Authenticate User', () => {
     it('should athenticate user with valid credentials', async () => {
         const { createUser, authenticateUser } = makeSut()
 
-        await createUser.execute('John Doe', 'john.doe@mail.com',
+        const user = await createUser.execute('John Doe', 'john.doe@mail.com',
             'correctpassword', '99999999999', new Date(), 'bio')
 
         const response = await authenticateUser.execute('john.doe@mail.com', 'correctpassword')
 
-        expect(response).toEqual('tokentokentoken')
+        expect(response).toEqual({
+            token: 'tokentokentoken',
+            id: user.id
+        })
     })
 })

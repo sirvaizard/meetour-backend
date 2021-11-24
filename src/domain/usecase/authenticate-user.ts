@@ -9,7 +9,7 @@ export default class AuthenticateUser {
         this.APP_SECRET = APP_SECRET
     }
 
-    async execute (email: string, password: string): Promise<string> {
+    async execute (email: string, password: string): Promise<{ token: string; id: string }> {
         const user = await this.userRepository.findByEmail(email)
         if (!user) {
             // TODO: Handle this error better
@@ -25,8 +25,14 @@ export default class AuthenticateUser {
             // TODO: handle this error better
             throw new Error()
         }
-        const token = this.token.generate({ id: user.id }, this.APP_SECRET)
 
-        return token
+        const { id } = user
+
+        const token = this.token.generate({ id }, this.APP_SECRET)
+
+        return {
+            token,
+            id
+        }
     }
 }
