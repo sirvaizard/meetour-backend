@@ -7,7 +7,7 @@ export default class CreateUserController implements Controller {
     constructor (private createUser: CreateUser) {}
 
     async execute(httpRequest: HttpRequest): Promise<HttpResponse> {
-        const requiredFields = ['name', 'email', 'password', 'cpf', 'birth']
+        const requiredFields = ['name', 'email', 'password', 'cpf', 'birth', 'bio']
 
         const missingFields = []
         for (const field of requiredFields) {
@@ -26,8 +26,8 @@ export default class CreateUserController implements Controller {
         }
 
         try {
-            const { name, email, password, cpf, birth} = httpRequest.body
-            const user = await this.createUser.execute(name, email, password, cpf, birth)
+            const { name, email, password, cpf, birth, bio} = httpRequest.body
+            const user = await this.createUser.execute(name, email, password, cpf, birth, bio)
 
             return Promise.resolve({
                 statusCode: 201,

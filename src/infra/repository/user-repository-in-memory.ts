@@ -8,9 +8,9 @@ export default class UserRepositoryInMemory implements UserRepository {
         this.users = []
     }
 
-    create(name: string, email: string, password: string, cpf: string, birth: Date): Promise<User> {
+    create(name: string, email: string, password: string, cpf: string, birth: Date, bio: string): Promise<User> {
         const user = new User(
-            String(this.users.length), cpf, password, name, birth, email
+            String(this.users.length), cpf, password, name, birth, email, bio
         )
         this.users.push(user)
         return Promise.resolve(user)

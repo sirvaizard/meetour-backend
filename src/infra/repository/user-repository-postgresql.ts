@@ -9,15 +9,16 @@ type UserDTO = {
     nome: string
     email: string
     senha: string
+    bio: string
     data_nascimento: Date
 }
 
 export default class UserRepositoryPostgreSQL implements UserRepository {
-    async create(name: string, email: string, password: string, cpf: string, birth: Date): Promise<User> {
+    async create(name: string, email: string, password: string, cpf: string, birth: Date, bio: string): Promise<User> {
 
         await db.query(sql`
-                INSERT INTO usuario (nome, email, senha, cpf, data_nascimento)
-                VALUES (${name}, ${email}, ${password}, ${cpf}, ${birth})
+                INSERT INTO usuario (nome, email, senha, cpf, data_nascimento, bio)
+                VALUES (${name}, ${email}, ${password}, ${cpf}, ${birth}, ${bio})
             `)
 
         const userDTO: UserDTO[] = await db.query(sql`
@@ -31,7 +32,8 @@ export default class UserRepositoryPostgreSQL implements UserRepository {
             userDTO[0].senha,
             userDTO[0].nome,
             userDTO[0].data_nascimento,
-            userDTO[0].email
+            userDTO[0].email,
+            userDTO[0].bio
         )
 
         return Promise.resolve(user)
@@ -49,7 +51,8 @@ export default class UserRepositoryPostgreSQL implements UserRepository {
                 userDTO[0].senha,
                 userDTO[0].nome,
                 userDTO[0].data_nascimento,
-                userDTO[0].email
+                userDTO[0].email,
+                userDTO[0].bio
             ))
         }
 
@@ -68,7 +71,8 @@ export default class UserRepositoryPostgreSQL implements UserRepository {
                 userDTO[0].senha,
                 userDTO[0].nome,
                 userDTO[0].data_nascimento,
-                userDTO[0].email
+                userDTO[0].email,
+                userDTO[0].bio
             ))
         }
 
@@ -87,7 +91,8 @@ export default class UserRepositoryPostgreSQL implements UserRepository {
                 userDTO[0].senha,
                 userDTO[0].nome,
                 userDTO[0].data_nascimento,
-                userDTO[0].email
+                userDTO[0].email,
+                userDTO[0].bio
             ))
         }
 

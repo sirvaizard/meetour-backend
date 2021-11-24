@@ -22,6 +22,7 @@ type UserDTO = {
     nome: string
     email: string
     senha: string
+    bio: string
     data_nascimento: Date
 }
 
@@ -38,8 +39,8 @@ export default class EventRepositoryPostgreSQL implements EventRepository {
         const users: User[] = []
 
         for (const userDTO of usersDTO) {
-            const { id, cpf, data_nascimento, nome, email, senha } = userDTO
-            const user = new User(id, cpf, senha, nome, data_nascimento, email)
+            const { id, cpf, data_nascimento, nome, email, senha, bio } = userDTO
+            const user = new User(id, cpf, senha, nome, data_nascimento, email, bio)
 
             users.push(user)
         }
@@ -144,9 +145,9 @@ export default class EventRepositoryPostgreSQL implements EventRepository {
             `)
 
             for (const atteendeeDTO of attendeesDTO) {
-                const { id, cpf, data_nascimento, nome, email, senha } = atteendeeDTO
+                const { id, cpf, data_nascimento, nome, email, senha, bio } = atteendeeDTO
 
-                const user = new User(id, cpf, senha, nome, data_nascimento, email)
+                const user = new User(id, cpf, senha, nome, data_nascimento, email, bio)
 
                 event.addAttendee(user)
             }

@@ -56,7 +56,7 @@ describe('#Join Event', () => {
         validTime.setDate(validTime.getDate() + 1)
         validTime.setHours(12)
         const event = await createEvent.execute('Event 1', 'My event 1', location.id, validTime, 100)
-        const user = await createUser.execute('John Doe', 'john.doe@mail.com', '111111', '999999', new Date())
+        const user = await createUser.execute('John Doe', 'john.doe@mail.com', '111111', '999999', new Date(), 'bio')
 
         await joinEvent.execute(event, user)
 
@@ -71,7 +71,7 @@ describe('#Join Event', () => {
         validTime.setDate(validTime.getDate() + 1)
         validTime.setHours(12)
         const event = await createEvent.execute('Event 1', 'My event 1', location.id, validTime, 100)
-        const user = await createUser.execute('John Doe', 'john.doe@mail.com', '111111', '999999', new Date())
+        const user = await createUser.execute('John Doe', 'john.doe@mail.com', '111111', '999999', new Date(), 'bio')
 
         await joinEvent.execute(event, user)
 
@@ -96,12 +96,12 @@ describe('#Join Event', () => {
         const event = await createEvent.execute('Event 1', 'My event 1', location.id, validTime, 1)
 
         await joinEvent.execute(event,
-            await createUser.execute('John Doe', 'john.doe@mail.com', '111111', '999999', new Date()))
+            await createUser.execute('John Doe', 'john.doe@mail.com', '111111', '999999', new Date(), 'bio'))
 
         let error
         try {
             await joinEvent.execute(event,
-                await createUser.execute('Jane Doe', 'jane.doe@mail.com', '111111', '999998', new Date()))
+                await createUser.execute('Jane Doe', 'jane.doe@mail.com', '111111', '999998', new Date(), 'bio'))
         } catch (e) {
             error = e
         }
@@ -122,7 +122,7 @@ describe('#Join Event', () => {
         let error
         try {
             await joinEvent.execute(event,
-                await createUser.execute('Jane Doe', 'jane.doe@mail.com', '111111', '999998', new Date()))
+                await createUser.execute('Jane Doe', 'jane.doe@mail.com', '111111', '999998', new Date(), 'bio'))
         } catch (e) {
             error = e
         }

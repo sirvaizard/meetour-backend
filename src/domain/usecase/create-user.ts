@@ -4,7 +4,7 @@ import Hash from "../ports/hash";
 export default class CreateUser {
     constructor (private userRepository: UserRepository, private hash: Hash) {}
 
-    async execute (name: string, email: string, password: string, cpf: string, birth: Date) {
+    async execute (name: string, email: string, password: string, cpf: string, birth: Date, bio: string) {
         // TODO: should check for fields validity
 
         if (await this.userRepository.findByEmail(email)) {
@@ -18,6 +18,6 @@ export default class CreateUser {
         }
 
         const password_hash = await this.hash.hash(password)
-        return this.userRepository.create(name, email, password_hash, cpf, birth)
+        return this.userRepository.create(name, email, password_hash, cpf, birth, bio)
     }
 }

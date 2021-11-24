@@ -92,7 +92,7 @@ describe('#Authenticate User Controller', () => {
         jest.spyOn(hash, 'compare').mockReturnValueOnce(Promise.resolve(false))
 
         await createUser.execute('John Doe', 'john.doe@mail.com',
-            'validpassword', '99999999999', new Date())
+            'validpassword', '99999999999', new Date(), 'bio')
 
         const payload = {
             body: {
@@ -113,7 +113,7 @@ describe('#Authenticate User Controller', () => {
         const { createUser, authenticateUserController, hash } = makeSut()
 
         await createUser.execute('John Doe', 'john.doe@mail.com',
-            'validpassword', '99999999999', new Date())
+            'validpassword', '99999999999', new Date(), 'bio')
 
         const payload = {
             body: {

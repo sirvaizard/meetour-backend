@@ -54,7 +54,7 @@ describe('#List Event Attendees', () => {
         const { createUser, createLocation, createEvent, joinEvent, listEventAttendees } = makeSut()
 
         const user = await createUser.execute('John Doe', 'john@mail.com',
-            'pass', '8888888888', new Date())
+            'pass', '8888888888', new Date(), 'bio')
 
         const location = await createLocation.execute('Location', 'Address', 10, 10, 0, 23, 'url')
         const event = await createEvent.execute('Event', 'Description', location.id,

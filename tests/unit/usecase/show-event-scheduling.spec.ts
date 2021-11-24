@@ -58,7 +58,7 @@ describe('#Show Event Scheduling', () => {
 
         const location = await createLocation.execute('Location', 'Address', 10, 10, 1, 23, 'image')
         await createEvent.execute('Event', 'Description', location.id, new Date(), 50)
-        const user = await createUser.execute('John Doe', 'john.doe@mail.com', 'pass', '99999999999', new Date())
+        const user = await createUser.execute('John Doe', 'john.doe@mail.com', 'pass', '99999999999', new Date(), 'bio')
 
         const events = await showEventScheduling.execute(user)
 
@@ -70,7 +70,7 @@ describe('#Show Event Scheduling', () => {
 
         const location = await createLocation.execute('Location', 'Address', 10, 10, 1, 23, 'image')
         const event = await createEvent.execute('Event', 'Description', location.id, new Date(), 50)
-        const user = await createUser.execute('John Doe', 'john.doe@mail.com', 'pass', '99999999999', new Date())
+        const user = await createUser.execute('John Doe', 'john.doe@mail.com', 'pass', '99999999999', new Date(), 'bio')
 
         await joinEvent.execute(event, user)
 

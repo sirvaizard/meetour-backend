@@ -54,7 +54,7 @@ describe('#Show User Controller', () => {
         const { showUserController, createUser } = makeSut()
 
         const user = await createUser.execute('John Doe', 'john.doe@mail.com', 'asdas',
-            '77777777777', new Date())
+            '77777777777', new Date(), 'bio')
 
         const payload = {
             params: {

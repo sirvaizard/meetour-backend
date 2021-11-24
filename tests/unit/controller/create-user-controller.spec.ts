@@ -117,6 +117,24 @@ describe('#Create User Controller', () => {
         expect(response.statusCode).toBe(400)
     })
 
+    it('should return 400 if no bio is provided', async () => {
+        const { createUserController } = makeSut()
+
+        const payload = {
+            body: {
+                name: 'John Doe',
+                email: 'john.doe@mail.com',
+                password: 'validpassword',
+                cpf: 'validcpf',
+                birth: new Date()
+            }
+        }
+
+        const response = await createUserController.execute(payload)
+
+        expect(response.statusCode).toBe(400)
+    })
+
     it('should return 201 if valid data is provided', async () => {
         const { createUserController } = makeSut()
         const now = new Date()
@@ -126,7 +144,8 @@ describe('#Create User Controller', () => {
                 email: 'john.doe@mail.com',
                 password: 'validpassword',
                 cpf: 'validcpf',
-                birth: now
+                birth: now,
+                bio: 'bio'
             }
         }
 
@@ -138,7 +157,8 @@ describe('#Create User Controller', () => {
             name: 'John Doe',
             email: 'john.doe@mail.com',
             cpf: 'validcpf',
-            birth: now
+            birth: now,
+            bio: 'bio'
         })
     })
 })

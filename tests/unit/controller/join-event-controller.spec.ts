@@ -79,7 +79,7 @@ describe('#Join Event Controller', () => {
     it('should return 400 if event is not provided', async () => {
         const { joinEventController, createUser } = makeSut()
 
-        const user = await createUser.execute('John Doe', 'john.doe@mail.com', '123123', '12312312312', new Date())
+        const user = await createUser.execute('John Doe', 'john.doe@mail.com', '123123', '12312312312', new Date(), 'bio')
 
         const payload = {
             body: {
@@ -95,7 +95,7 @@ describe('#Join Event Controller', () => {
     it('should return 400 if event does not exists', async () => {
         const { joinEventController, createUser } = makeSut()
 
-        const user = await createUser.execute('John Doe', 'john.doe@mail.com', '123123', '12312312312', new Date())
+        const user = await createUser.execute('John Doe', 'john.doe@mail.com', '123123', '12312312312', new Date(), 'bio')
 
         const payload = {
             body: {
@@ -120,7 +120,7 @@ describe('#Join Event Controller', () => {
 
         const location = await createLocation.execute('Location A', '5th Av.', 20, 20, 8, 22, 'image')
         const event = await createEvent.execute('Event A', 'My Event A', location.id, validDate, 50)
-        const user = await createUser.execute('John Doe', 'john.doe@mail.com', '123123', '12312312312', new Date())
+        const user = await createUser.execute('John Doe', 'john.doe@mail.com', '123123', '12312312312', new Date(), 'bio')
 
         const payload = {
             body: {

@@ -41,7 +41,7 @@ describe('Show Event Scheduling Controller', () => {
     it('should return 200', async () => {
         const { showEventSchedulingController, createUser } = makeSut()
 
-        const user = await createUser.execute('John Doe', 'john.doe@mail.com', 'pass', '8888888888', new Date())
+        const user = await createUser.execute('John Doe', 'john.doe@mail.com', 'pass', '8888888888', new Date(), 'bio')
 
         const payload = {
             body: {

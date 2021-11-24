@@ -54,7 +54,7 @@ describe('#Authenticate User', () => {
         const { createUser, authenticateUser } = makeSut()
 
         await createUser.execute('John Doe', 'john.doe@mail.com',
-            'correctpassword', '99999999999', new Date())
+            'correctpassword', '99999999999', new Date(), 'bio')
 
         const response = await authenticateUser.execute('john.doe@mail.com', 'correctpassword')
 

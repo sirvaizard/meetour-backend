@@ -47,7 +47,7 @@ describe('#Show User', () => {
         const { createUser, showUser } = makeSut()
 
         const newUser = await createUser.execute('John Doe', 'john.doe@mail.com',
-            'dasdas', '77777777777', new Date())
+            'dasdas', '77777777777', new Date(), 'bio')
 
         const user = await showUser.execute(newUser.id)
 

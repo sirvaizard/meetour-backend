@@ -40,14 +40,15 @@ describe('#User', () => {
         const now = new Date()
 
         const user = await createUser.execute('John Doe', 'john.doe@mail.com',
-            'correctpassword', '99999999999', now)
+            'correctpassword', '99999999999', now, 'bio')
 
         expect(user).toEqual({
             id: '0',
             name: 'John Doe',
             email: 'john.doe@mail.com',
             birth: now,
-            cpf: '99999999999'
+            cpf: '99999999999',
+            bio: 'bio'
         })
     })
 
@@ -56,7 +57,7 @@ describe('#User', () => {
         const hashSpy = jest.spyOn(hash, 'hash')
 
         await createUser.execute('John Doe', 'john.doe@mail.com',
-            'correctpassword', '99999999999', new Date())
+            'correctpassword', '99999999999', new Date(), 'bio')
 
         expect(hashSpy).toHaveBeenCalledWith('correctpassword')
     })
@@ -65,12 +66,12 @@ describe('#User', () => {
         const { createUser } = makeSut()
 
         await createUser.execute('John Doe', 'john.doe@mail.com',
-            'correctpassword', '99999999999', new Date())
+            'correctpassword', '99999999999', new Date(), 'bio')
 
         let error
         try {
             await createUser.execute(
-                'John Doe', 'john.doe@mail.com', 'correctpassword', '99999999998', new Date())
+                'John Doe', 'john.doe@mail.com', 'correctpassword', '99999999998', new Date(), 'bio')
         } catch (e) {
             error = e
         }
@@ -83,12 +84,12 @@ describe('#User', () => {
         const { createUser } = makeSut()
 
         await createUser.execute('John Doe', 'john.doe@mail.com',
-            'correctpassword', '99999999999', new Date())
+            'correctpassword', '99999999999', new Date(), 'bio')
 
         let error
         try {
             await createUser.execute(
-                'Jane Doe', 'jane.doe@mail.com', 'correctpassword', '99999999999', new Date())
+                'Jane Doe', 'jane.doe@mail.com', 'correctpassword', '99999999999', new Date(), 'bio')
         } catch (e) {
             error = e
         }
