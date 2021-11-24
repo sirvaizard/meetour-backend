@@ -25,6 +25,10 @@ export default class Event {
         return this.attendees.includes(user)
     }
 
+    getAttendees (): User[] {
+        return [...this.attendees]
+    }
+
     addAttendee (user: User): boolean {
         if (this.hasAttendee(user)) {
             return false
