@@ -191,18 +191,7 @@ export default class EventRepositoryPostgreSQL implements EventRepository {
 
             const event = new Event(id, nome, descricao, location, data, capacidade)
 
-            const attendeesDTO: UserDTO[] = await db.query(sql`
-                SELECT * FROM participa p
-                LEFT JOIN usuario u
-                ON p.usuario = u.id
-                WHERE p.encontro = ${event.id};
-            `)
-
-            for (const atteendeeDTO of attendeesDTO) {
-                const { id, cpf, data_nascimento, nome, email, senha } = atteendeeDTO
-
-                const user = new User(id, cpf, senha, nome, data_nascimento, email)
-
+            for (const user of await this.getAttendees(event)) {
                 event.addAttendee(user)
             }
 
